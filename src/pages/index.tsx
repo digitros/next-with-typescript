@@ -1,6 +1,29 @@
+import React, { useState } from "react";
 import Head from "next/head";
 
+import { RandomFox } from "@/components/RandomFox";
+
+// generate a random number between 1 and 123
+const randomNumber = () => Math.floor(Math.random() * 123) + 1;
+
+//generate unique id
+const generateId = () => Math.random().toString(36).substr(2, 9);
+
+type ImageItem = { id: string; url: string };
+
 export default function Home() {
+  const [images, setImages] = useState<ImageItem[]>([]);
+
+  const addNewFox: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.preventDefault();
+    const newFox: ImageItem = {
+      id: generateId(),
+      url: `https://randomfox.ca/images/${randomNumber()}.jpg`,
+    };
+
+    setImages([...images, newFox]);
+  };
+
   return (
     <>
       <Head>
@@ -11,6 +34,17 @@ export default function Home() {
       </Head>
       <main>
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={addNewFox}
+        >
+          Add Fox
+        </button>
+        {images.map((image) => (
+          <div key={image.id} className="p-4">
+            <RandomFox image={image.url} />
+          </div>
+        ))}
       </main>
     </>
   );
