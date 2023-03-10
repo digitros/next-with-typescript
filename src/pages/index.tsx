@@ -9,14 +9,12 @@ const randomNumber = () => Math.floor(Math.random() * 123) + 1;
 //generate unique id
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
-type ImageItem = { id: string; url: string };
-
 export default function Home() {
-  const [images, setImages] = useState<ImageItem[]>([]);
+  const [images, setImages] = useState<IImageItem[]>([]);
 
   const addNewFox: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
-    const newFox: ImageItem = {
+    const newFox: IImageItem = {
       id: generateId(),
       url: `https://randomfox.ca/images/${randomNumber()}.jpg`,
     };
@@ -48,6 +46,7 @@ export default function Home() {
               height="auto"
               className="rounded-r bg-gray-300"
               onClick={() => console.log("hello")}
+              onLazyLoad={(img) => console.log(img)}
             />
           </div>
         ))}
