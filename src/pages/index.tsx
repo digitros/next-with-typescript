@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Head from "next/head";
+import { random } from "lodash";
 
 import { LazyImage } from "@/components/LazyImage";
 
 // generate a random number between 1 and 123
-const randomNumber = () => Math.floor(Math.random() * 123) + 1;
+const randomNumber = () => random(1, 123);
 
 //generate unique id
 const generateId = () => Math.random().toString(36).substr(2, 9);
