@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 
-import { RandomFox } from "@/components/RandomFox";
+import { LazyImage } from "@/components/LazyImage";
 
 // generate a random number between 1 and 123
 const randomNumber = () => Math.floor(Math.random() * 123) + 1;
@@ -42,7 +42,13 @@ export default function Home() {
         </button>
         {images.map((image) => (
           <div key={image.id} className="p-4">
-            <RandomFox image={image.url} />
+            <LazyImage
+              src={image.url}
+              width={320}
+              height="auto"
+              className="rounded-r bg-gray-300"
+              onClick={() => console.log("hello")}
+            />
           </div>
         ))}
       </main>
